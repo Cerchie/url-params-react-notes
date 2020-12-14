@@ -1,32 +1,7 @@
 import React from 'react';
-import DogList from './DogList';
-import DogDetails from './DogDetails';
-import Nav from './Nav';
+import {Link} from 'react-router-dom';
 
-import { Route, Switch, Redirect } from "react-router-dom";
-
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-
-  <Nav />
-  <Switch>
-    <Route exact path="/dogs" >
-      <DogList />
-    </Route>
-    <Route path="/dogs/:name" >
-      <DogDetails dogs={App.defaultProps}/> 
-    </Route>
-    <Redirect to="/dogs" />
-  </Switch>
-    
-    </div>
-  );
-}
-
-App.defaultProps = 
+const defaultProps = 
  [
       {
         name: "Whiskey",
@@ -65,6 +40,21 @@ App.defaultProps =
         ]
       }
     ]
+  
 
 
-export default App;
+function DogList(){
+   
+    return (
+        <ul>
+            {defaultProps.map(dog => (
+                <li key={dog.name}>
+                    <Link to={`/dog/${dog.name}`}>Show me the {dog.name}! </Link>
+                    <Link to="/blargh">Broken Link</Link>
+                </li>
+            ))}
+        </ul>
+    )
+}
+
+export default DogList;
